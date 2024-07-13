@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
 import {
@@ -89,7 +89,13 @@ export class MessageData {
 
   async delete(messageId: ObjectID): Promise<ChatMessage> {
     // TODO allow a message to be marked as deleted
-    return new ChatMessage() // Minimum to pass ts checks -replace this
+    const message = await this.chatMessageModel.findById(messageId);
+    if (!message) {
+      throw new NotFoundException('Message not found');
+    }
+    message.deleted = true;
+    await message.save();
+    return message;
   }
 
   async resolve(messageId: ObjectID): Promise<ChatMessage> {
