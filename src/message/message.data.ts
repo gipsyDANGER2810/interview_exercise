@@ -29,6 +29,7 @@ export class MessageData {
     chatMessage.conversationId = data.conversationId;
     chatMessage.created = new Date();
     chatMessage.deleted = false;
+    
 
     createRichContent(data, chatMessage);
 
@@ -41,6 +42,30 @@ export class MessageData {
     if (!message) throw new Error('Message not found');
     return chatMessageToObject(message);
   }
+
+  // async addTags(messageId: ObjectID, tags: string[]): Promise<ChatMessage> {
+  //   const message = await this.chatMessageModel.findById(messageId);
+  //   if (!message) {
+  //     throw new NotFoundException('Message not found');
+  //   }
+  //   message.tags.push(...tags);
+  //   await message.save();
+  //   return message;
+  // }
+
+  // async updateTags(messageId: ObjectID, tags: string[]): Promise<ChatMessage> {
+  //   const message = await this.chatMessageModel.findById(messageId);
+  //   if (!message) {
+  //     throw new NotFoundException('Message not found');
+  //   }
+  //   message.tags = tags;
+  //   await message.save();
+  //   return message;
+  // }
+
+  // async findMessagesByTags(tags: string[]): Promise<ChatMessage[]> {
+  //   return this.chatMessageModel.find({ tags: { $in: tags } }).exec();
+  // }
 
 
   async getChatConversationMessages(

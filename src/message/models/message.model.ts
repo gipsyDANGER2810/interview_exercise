@@ -154,6 +154,10 @@ export class ChatMessageModel {
   })
   reactions?: Reaction[];
 
+  // Add tags to message model for sender 
+  // @Prop({ type: [String], default: [] })
+  // tags: string[];
+  
   /**
    * All the properties below are virtual properties
    * @url https://mongoosejs.com/docs/tutorials/virtuals.html
